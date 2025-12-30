@@ -1,37 +1,41 @@
 ```mermaid
 
 erDiagram
-Buku {
-    int id PK
-    string judul
-}
+    petugas {
+        int id PK
+        string name
+    }
 
-kategori {
-    int id PK
-    string name
-}
+    rak_buku {
+        int id PK
+        string name
+        int petugas_id FK
+    }
 
-rak_buku {
-    int id PK
-    string name
-}
+    kategori {
+        int id PK
+        string name
+        int rak_buku_id FK
+    }
 
-petugas {
-    int id PK
-    string name
-}
+    buku {
+        int id PK
+        string judul
+        int kategori_id FK
+    }
 
-peminjam {
-    int id PK
-    string name
-}
+    peminjaman {
+        int id PK
+        string nama_peminjam
+        date tanggal_pinjam
+        date tanggal_kembali
+        string status
+        int buku_id FK
+    }
 
-rak_buku ||--o{kategori : memiliki
-
-kategori ||--o{Buku : memiliki
-
-petugas ||--o{rak_buku : memiliki
-
-peminjam ||--o{Buku : meminjam
+    petugas ||--o{ rak_buku : mengelola
+    rak_buku ||--o{ kategori : memiliki
+    kategori ||--o{ buku : memiliki
+    buku ||--o{ peminjaman : dipinjam
 
 ```
